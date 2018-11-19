@@ -9,7 +9,7 @@ sudo wget -qO /usr/local/bin/stern https://github.com/wercker/stern/releases/dow
        sudo chmod +x /usr/local/bin/stern
 
 sudo apt-get update
-sudo apt-get install -y unzip
+sudo apt-get install -y unzip docker-compose
 
 # kubectx/kubens
 # wget -q https://github.com/ahmetb/kubectx/archive/v0.5.0.zip && \
