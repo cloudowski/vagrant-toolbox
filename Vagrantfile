@@ -20,6 +20,7 @@ sudo apt-get install -y unzip docker-compose
 # 	rm -fr v0.5.0.zip kubectx-0.5.0/
 
 echo '10.30.30.10 vagrant.example.com vagrant' >> /etc/hosts
+echo "ubuntu:ubuntu" | chpasswd
 SCRIPT
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
