@@ -11,6 +11,9 @@ sudo wget -qO /usr/local/bin/stern https://github.com/wercker/stern/releases/dow
 sudo apt-get update
 sudo apt-get install -y unzip docker-compose
 
+# https://github.com/docker/compose/issues/6023
+chmod -x /usr/bin/docker-credential-secretservice
+
 # kubectx/kubens
 # wget -q https://github.com/ahmetb/kubectx/archive/v0.5.0.zip && \
 # 	unzip v0.5.0.zip && \
