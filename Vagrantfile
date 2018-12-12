@@ -14,6 +14,9 @@ sudo apt-get install -y unzip docker-compose
 # https://github.com/docker/compose/issues/6023
 chmod -x /usr/bin/docker-credential-secretservice
 
+# add vagrant to docker group
+sudo usermod -a -G docker vagrant
+
 # kubectx/kubens
 # wget -q https://github.com/ahmetb/kubectx/archive/v0.5.0.zip && \
 # 	unzip v0.5.0.zip && \
