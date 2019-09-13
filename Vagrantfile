@@ -17,13 +17,18 @@ chmod -x /usr/bin/docker-credential-secretservice
 # add vagrant to docker group
 sudo usermod -a -G docker vagrant
 
-# kubectx/kubens
-# wget -q https://github.com/ahmetb/kubectx/archive/v0.5.0.zip && \
-# 	unzip v0.5.0.zip && \
-# 	sudo cp kubectx-0.5.0/completion/*bash /usr/share/bash-completion/ && \
-# 	sudo chmod +x kubectx-0.5.0/kube* && \
-# 	sudo cp kubectx-0.5.0/kube* /usr/local/bin/ && \
-# 	rm -fr v0.5.0.zip kubectx-0.5.0/
+# add buildah and podman
+sudo apt-get update -qq
+sudo apt-get install -qq -y software-properties-common
+sudo add-apt-repository -y ppa:projectatomic/ppa
+sudo apt-get update -qq
+sudo apt-get -qq -y install buildah podman
+
+# configure default registry for buildah
+cat << EOF >> /etc/containers/registries.conf
+[registries.search]
+registries = ['docker.io']
+EOF
 
 echo '10.30.30.10 vagrant.example.com vagrant' >> /etc/hosts
 SCRIPT
@@ -51,7 +56,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       host.vm.network "private_network", ip: "10.30.30.10"
       host.vm.hostname = "vagrant.example.com"
       host.vm.provider "virtualbox" do |v|
-        v.memory = 1024
+        v.memory = 2048
         v.cpus = 1
       end
   end
