@@ -36,9 +36,11 @@ SCRIPT
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # use global directory
-  config.vm.synced_folder '.', '/vagrant'
+  #config.vm.synced_folder '.', '/vagrant'
+  # disabled because of windows issues with smb shares
+  config.vm.synced_folder ".", "/vagrant", disabled: true
 
-  config.vm.box = "ubuntu/bionic64"
+  config.vm.box = "bento/ubuntu-18.04"
 
   # SHELL PROVISIONING
   # config.vm.provision :shell, :path => "provision.sh"
@@ -58,6 +60,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       host.vm.provider "virtualbox" do |v|
         v.memory = 2048
         v.cpus = 1
+      end
+      host.vm.provider "hyperv" do |h|
+        h.memory = 2048
+        h.cpus = 1
       end
   end
 end
